@@ -1,14 +1,21 @@
 main
+
 └── runHomeScreen()        
-  D) Add Deposit      → ____________
-│ P) Make Payment     → ____________
-│ L) Ledger           → runLedgerScreen()
+  
+| D) Add Deposit → addDeposit
+ 
+| P) Make Payment → makePayment
+
+│ L) Ledger → runLedgerScreen()
+
 │ X) Exit
+
 │
 └── runLedgerScreen() 
-  A) All              → ____________
-│ D) Deposits         → ____________
-│ P) Payments         → ____________
+
+| A) All → displayAllTransactions 
+│ D) Deposits         → displayAllDeposits
+│ P) Payments         → displayAllPayments
 │ R) Reports          → runReportsScreen()
 │ H) Home             → back to Home
 │
