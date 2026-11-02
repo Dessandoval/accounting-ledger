@@ -2,9 +2,9 @@ main
 
 └── runHomeScreen()        
   
-| D) Add Deposit → addDeposit
+| D) Add Deposit → addDeposit()
  
-| P) Make Payment → makePayment
+| P) Make Payment → makePayment()
 
 │ L) Ledger → runLedgerScreen()
 
@@ -13,16 +13,16 @@ main
 │
 └── runLedgerScreen() 
 
-| A) All → displayAllTransactions 
-│ D) Deposits         → displayAllDeposits
-│ P) Payments         → displayAllPayments
+| A) All → displayAllTransactions ()
+│ D) Deposits         → displayDeposits()
+│ P) Payments         → displayPayments()
 │ R) Reports          → runReportsScreen()
 │ H) Home             → back to Home
 │
 └── runReportsScreen()
-1) Month To Date    → ____________
-2) Previous Month   → ____________
-3) Year To Date     → ____________
-4) Previous Year    → ____________
-5) Search by Vendor → ____________
+1) Month To Date    → runMonthToDateReport()
+2) Previous Month   → runPreviousMonthReport()
+3) Year To Date     → runYearToDateReport()
+4) Previous Year    → runPreviousYearReport()
+5) Search by Vendor → searchVendor()
 0) Back             → back to Ledger
