@@ -1,0 +1,21 @@
+main
+└── runHomeScreen()        
+  D) Add Deposit      → ____________
+│ P) Make Payment     → ____________
+│ L) Ledger           → runLedgerScreen()
+│ X) Exit
+│
+└── runLedgerScreen() 
+  A) All              → ____________
+│ D) Deposits         → ____________
+│ P) Payments         → ____________
+│ R) Reports          → runReportsScreen()
+│ H) Home             → back to Home
+│
+└── runReportsScreen()
+1) Month To Date    → ____________
+2) Previous Month   → ____________
+3) Year To Date     → ____________
+4) Previous Year    → ____________
+5) Search by Vendor → ____________
+0) Back             → back to Ledger
