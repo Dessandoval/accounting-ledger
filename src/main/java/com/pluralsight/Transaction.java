@@ -4,14 +4,14 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Transactions {
+public class Transaction {
     private String descriptions;
     private double amount;
     private String vendor;
     private LocalDate date;
     private LocalTime time;
 
-    public Transactions(String descriptions, double amount, String vendor, LocalDate date, LocalTime time) {
+    public Transaction(String descriptions, double amount, String vendor, LocalDate date, LocalTime time) {
         this.descriptions = descriptions;
         this.amount = amount;
         this.vendor = vendor;
