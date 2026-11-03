@@ -138,7 +138,8 @@ public class App {
         System.out.print("Press Enter to go back to the menu...");
         scanner.nextLine();
     }
-    public static void saveTransaction(){
+    public static boolean saveTransaction(Transaction transaction){
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))){
             writer.write(transactions.toCsvRow() + "\n");
             System.out.println("Deposit saved: "); {
