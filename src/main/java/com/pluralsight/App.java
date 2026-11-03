@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -42,15 +40,33 @@ public class App {
         } while (!command.equals("X"));
     }
     private static void addDeposit() {
-        System.out.println("\n--- Add Deposit ---");
+        System.out.println("--- Add Deposit ---");
         LocalDate date = LocalDate.now();
-        String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalTime time = LocalTime.now();
 
-        System.out.print("Enter description: ");
-        String description = scanner.nextLine();
+        String description = promptForString("Enter description: ");
+        String vendor = promptForString("Enter vendor: ");
+        double amount = 0;
+        while (amount <= 0) {
+            System.out.println("Enter amount: ");
+            try {
+                amount = Double.parseDouble(scanner.nextLine().trim());
+                if (amount <= 0) {
+                    System.out.println("Amount must be greater than 0");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a number (like $89.00): ");
+            }
+        }
 
-        System.out.print("Enter vendor/payee: ");
-        String vendor = scanner.nextLine()
+        Transaction deposit = new Transaction(description, amount, vendor, date, time);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
+            writer.write(deposit.toCsvRow() + "\n");
+            System.out.println("Deposit saved: ");
+        }  catch (IOException e) {
+            System.out.println("ERROR: Could not save the deposit: " + e.getMessage());
+        }
+        pressEnterToContinue();
 
 
 
@@ -59,16 +75,17 @@ public class App {
         System.out.println("--- Make Payment ---");
         LocalDate date = LocalDate.now();
         String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        double amount = 0;
 
     }
     public static void runLegerScreen() {
         String command;
         do {
             System.out.println();
-            System.out.println("=== Leger Screen ===");
-            System.out.println("A) All Transactions");
-            System.out.println("D) Deposits Only");
-            System.out.println("P) Payments Only ");
+            System.out.println("=== Ledger Screen ===");
+            System.out.println("A) All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments");
             System.out.println("R) Reports");
             System.out.println("H) Home");
             System.out.print("Enter a command: ");
@@ -125,8 +142,8 @@ public class App {
                 int id = Integer.parseInt(fields[0]);
                 String name = fields[1];
                 double price = Double.parseDouble(fields[2]);
-                Transaction transaction1 = new Transaction(descriptions, amount, vendor, date, time);
-                transactions.add(transactions);
+//                Transaction transaction1 = new Transaction(descriptions, amount, vendor, date, time);
+//                transactions.add(transactions);
             }
 
             bufferedReader.close();
@@ -142,6 +159,7 @@ public class App {
         scanner.nextLine();
     }
     public static void promptForString(){
+
 
     }
     public static void displayAllTransactions(){

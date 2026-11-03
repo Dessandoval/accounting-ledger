@@ -5,26 +5,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Transaction {
-    private String descriptions;
+    private String description;
     private double amount;
     private String vendor;
     private LocalDate date;
     private LocalTime time;
 
-    public Transaction(String descriptions, double amount, String vendor, LocalDate date, LocalTime time) {
-        this.descriptions = descriptions;
+    public Transaction(String description, double amount, String vendor, LocalDate date, LocalTime time) {
+        this.description = description;
         this.amount = amount;
         this.vendor = vendor;
         this.date = date;
         this.time = time;
     }
 
-    public String getDescriptions() {
-        return descriptions;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getAmount() {
@@ -57,5 +57,8 @@ public class Transaction {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+    public String toCsvRow() {
+        return date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
     }
 }
