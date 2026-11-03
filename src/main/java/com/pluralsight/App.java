@@ -150,8 +150,8 @@ public class App {
             System.out.println("No transactions found.");
             return;
         }
-        for (Transaction t : transactions) {
-            System.out.println(transactions);
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction.toCsvRow());
         }
 
     }
@@ -181,6 +181,7 @@ public class App {
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
+            bufferedReader.readLine();
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] fields = line.split(Pattern.quote("|"));
