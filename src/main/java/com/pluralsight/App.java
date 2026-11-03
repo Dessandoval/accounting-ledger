@@ -44,38 +44,39 @@ public class App {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        String description = promptForString("Enter description: ");
-        String vendor = promptForString("Enter vendor: ");
-        double amount = 0;
-        while (amount <= 0) {
-            System.out.println("Enter amount: ");
-            try {
-                amount = Double.parseDouble(scanner.nextLine().trim());
-                if (amount <= 0) {
-                    System.out.println("Amount must be greater than 0");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a number (like $89.00): ");
-            }
-        }
+        System.out.print("Enter description: ");
+        String description = scanner.nextLine();
 
-        Transaction deposit = new Transaction(date, time, description, vendor, amount);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
-            writer.write(deposit.toCsvRow() + "\n");
-            System.out.println("Deposit saved: ");
-        }  catch (IOException e) {
-            System.out.println("ERROR: Could not save the deposit: " + e.getMessage());
-        }
+        System.out.print("Enter vendor/payer: ");
+        String vendor = scanner.nextLine();
+
+        System.out.print("Enter amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
+
+        transactions.add(new Transaction(date, time, description, vendor, amount));
+        saveTransactions();
+        System.out.println("Deposit added successfully!");
         pressEnterToContinue();
-
-
 
     }
     private static void makePayment() {
         System.out.println("--- Make Payment ---");
         LocalDate date = LocalDate.now();
-        String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        double amount = 0;
+        LocalTime time = LocalTime.now();
+
+        System.out.print("Enter description: ");
+        String description = scanner.nextLine();
+
+        System.out.print("Enter vendor/payee: ");
+        String vendor = scanner.nextLine();
+
+        System.out.print("Enter amount (positive number, will be saved as a debit): ");
+        double amount = -Math.abs(Double.parseDouble(scanner.nextLine()));
+
+        transactions.add(new Transaction(date, time, description, vendor, amount));
+        saveTransactions();
+        System.out.println(" Payment recorded successfully!");
+        pressEnterToContinue();
 
     }
     public static void runLegerScreen() {
@@ -92,7 +93,7 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "A" -> displayAllTransactions();
+                case "A" -> displayAll();
                 case "D" -> displayDeposits();
                 case "P" -> displayPayments();
                 case "R" -> runReportsScreen();
@@ -158,11 +159,24 @@ public class App {
         System.out.print("Press Enter to go back to the menu...");
         scanner.nextLine();
     }
-    public static void promptForString(){
-
+    public static void saveTransactions(){
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))){
+//            writer.write(deposit.toCsvRow() + "\n");
+//            System.out.println("Deposit saved: "); {
+//            } catch (IOException e) {
+//                System.out.println("ERROR: Could not save the deposit: ");
+//            }
+//        }
 
     }
-    public static void displayAllTransactions(){
+    public static void displayAll(){
+        if (transactions == null || transactions.isEmpty()) {
+            System.out.println("No transactions found.");
+            return;
+        }
+        for (Transaction t : transactions) {
+            System.out.println(transactions);
+        }
 
     }
     public static void displayDeposits(){
@@ -186,4 +200,5 @@ public class App {
     public static void searchVendor(){
 
     }
+
 }
