@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class App {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Transaction> transaction = new ArrayList<>();
+    static ArrayList<Transaction> transactions = new ArrayList<>();
 
     public static void main(String[] args) {
         runHomeScreen();
@@ -59,7 +59,7 @@ public class App {
             }
         }
 
-        Transaction deposit = new Transaction(description, amount, vendor, date, time);
+        Transaction deposit = new Transaction(date, time, description, vendor, amount);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(deposit.toCsvRow() + "\n");
             System.out.println("Deposit saved: ");

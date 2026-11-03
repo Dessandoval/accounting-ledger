@@ -11,7 +11,7 @@ public class Transaction {
     private LocalDate date;
     private LocalTime time;
 
-    public Transaction(String description, double amount, String vendor, LocalDate date, LocalTime time) {
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
         this.description = description;
         this.amount = amount;
         this.vendor = vendor;
