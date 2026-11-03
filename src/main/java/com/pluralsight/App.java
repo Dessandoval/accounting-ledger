@@ -13,10 +13,10 @@ public class App {
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
     public static void main(String[] args) {
+        loadTransactions(); // load first the run menu
         runHomeScreen();
-        loadTransactions();
-
     }
+
     public static void runHomeScreen() {
         String command;
         do {
@@ -38,6 +38,7 @@ public class App {
             }
         } while (!command.equals("X"));
     }
+
     private static void addDeposit() {
         System.out.println("--- Add Deposit ---");
         LocalDate date = LocalDate.now();
@@ -58,6 +59,7 @@ public class App {
         pressEnterToContinue();
 
     }
+
     private static void makePayment() {
         System.out.println("--- Make Payment ---");
         LocalDate date = LocalDate.now();
@@ -78,6 +80,7 @@ public class App {
         pressEnterToContinue();
 
     }
+
     public static void runLegerScreen() {
         String command;
         do {
@@ -101,6 +104,7 @@ public class App {
             }
         } while (!command.equals("H"));
     }
+
     public static void runReportsScreen() {
         String command;
         do {
@@ -125,33 +129,6 @@ public class App {
                 default -> System.out.println("That isn't a command. Try again.");
             }
         } while (!command.equals("0"));
-    }
-    private static ArrayList<Transaction> getTransactions() {
-
-        ArrayList<Transaction> transactions = new ArrayList<>();
-        try {
-            FileReader fileReader = new FileReader("transactions.csv");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                // Split it into individual fields using the | character as the delimiter
-                String[] fields = line.split(Pattern.quote("|"));
-
-                // Fill data into product object and add to list
-                int id = Integer.parseInt(fields[0]);
-                String name = fields[1];
-                double price = Double.parseDouble(fields[2]);
-//                Transaction transaction1 = new Transaction(descriptions, amount, vendor, date, time);
-//                transactions.add(transactions);
-            }
-
-            bufferedReader.close();
-
-        } catch (IOException e) {
-            System.out.println("There was an error reading the transaction file. Check the location of the file.");
-        }
-        return transactions;
     }
     public static void pressEnterToContinue() {
         System.out.println();
