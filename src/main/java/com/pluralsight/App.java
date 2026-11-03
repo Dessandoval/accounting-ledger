@@ -14,8 +14,7 @@ public class App {
 
     public static void main(String[] args) {
         runHomeScreen();
-        runLegerScreen();
-        runReportsScreen();
+        loadTransactions();
 
     }
     public static void runHomeScreen() {
@@ -47,7 +46,7 @@ public class App {
         System.out.print("Enter description: ");
         String description = scanner.nextLine();
 
-        System.out.print("Enter vendor/payer: ");
+        System.out.print("Enter vendor: ");
         String vendor = scanner.nextLine();
 
         System.out.print("Enter amount: ");
@@ -67,7 +66,7 @@ public class App {
         System.out.print("Enter description: ");
         String description = scanner.nextLine();
 
-        System.out.print("Enter vendor/payee: ");
+        System.out.print("Enter vendor: ");
         String vendor = scanner.nextLine();
 
         System.out.print("Enter amount (positive number, will be saved as a debit): ");
@@ -75,7 +74,7 @@ public class App {
 
         transactions.add(new Transaction(date, time, description, vendor, amount));
         saveTransactions();
-        System.out.println(" Payment recorded successfully!");
+        System.out.println("Payment recorded successfully!");
         pressEnterToContinue();
 
     }
@@ -199,6 +198,28 @@ public class App {
     }
     public static void searchVendor(){
 
+    }
+    public static void loadTransactions() {
+        try {
+            FileReader fileReader = new FileReader("transactions.csv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] fields = line.split(Pattern.quote("|"));
+                if (fields.length == 5) {
+                    LocalDate date = LocalDate.parse(fields[0]);
+                    LocalTime time = LocalTime.parse(fields[1]);
+                    String description = fields[2];
+                    String vendor = fields[3];
+                    double amount = Double.parseDouble(fields[4]);
+                    transactions.add(new Transaction(date, time, description, vendor, amount));
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("There was an error loading the transaction file.");
+        }
     }
 
 }
