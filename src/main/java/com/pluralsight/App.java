@@ -15,7 +15,7 @@ public class App {
     public static void main(String[] args) {
         runHomeScreen();
         runLegerScreen();
-        runSearchScreen();
+        runReportsScreen();
 
     }
     public static void runHomeScreen() {
@@ -95,17 +95,17 @@ public class App {
                 case "A" -> displayAllTransactions();
                 case "D" -> displayDeposits();
                 case "P" -> displayPayments();
-                case "R" -> runSearchScreen();
+                case "R" -> runReportsScreen();
                 case "H" -> System.out.println("Back to Home");
                 default -> System.out.println("Invalid choice. Try again.");
             }
         } while (!command.equals("H"));
     }
-    public static void runSearchScreen() {
+    public static void runReportsScreen() {
         String command;
         do {
             System.out.println();
-            System.out.println("=== Search ===");
+            System.out.println("=== Reports ===");
             System.out.println("1) Month To Date");
             System.out.println("2) Previous Month");
             System.out.println("3) Year To Date");
