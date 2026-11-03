@@ -3,6 +3,7 @@ package com.pluralsight;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private String description;
@@ -59,6 +60,7 @@ public class Transaction {
         this.time = time;
     }
     public String toCsvRow() {
-        return date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
+        return date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "|"
+                + description + "|" + vendor + "|" + String.format("%.2f", amount);
     }
 }
