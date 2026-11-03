@@ -1,6 +1,10 @@
 package com.pluralsight;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -139,14 +143,14 @@ public class App {
         scanner.nextLine();
     }
     public static boolean saveTransaction(Transaction transaction){
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))){
-            writer.write(transactions.toCsvRow() + "\n");
-            System.out.println("Deposit saved: "); {
+        try (BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(transactionFile, true))){
+            bufferedwriter.write(transaction.toCsvRow() + "\n");
+            transactions.add(transaction);
+            return true; {
             } catch (IOException e) {
-                System.out.println("ERROR: Could not save the deposit: ");
+                System.out.println("ERROR: Could not save the deposit: " + transactionFile  + ": " + e.getMessage());
+                return false;
             }
-            transactions.add(new Transaction(date, time, description, vendor, amount));
         }
 
     }
