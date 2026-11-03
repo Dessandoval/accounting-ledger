@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class App {
+    static String transactionFile = ("transactions.csv");
+    static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+    static String rowFormat = "%-10s  %-8s  %-30s  %-22s  %10s%n";
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -54,7 +57,7 @@ public class App {
         double amount = Double.parseDouble(scanner.nextLine());
 
         transactions.add(new Transaction(date, time, description, vendor, amount));
-        saveTransactions();
+        saveTransaction();
         System.out.println("Deposit added successfully!");
         pressEnterToContinue();
 
@@ -74,9 +77,9 @@ public class App {
         System.out.print("Enter amount (positive number, will be saved as a debit): ");
         double amount = -Math.abs(Double.parseDouble(scanner.nextLine()));
 
-        transactions.add(new Transaction(date, time, description, vendor, amount));
-        saveTransactions();
-        System.out.println("Payment recorded successfully!");
+        if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
+            System.out.println("Payment recorded successfully!");
+        }
         pressEnterToContinue();
 
     }
@@ -135,14 +138,15 @@ public class App {
         System.out.print("Press Enter to go back to the menu...");
         scanner.nextLine();
     }
-    public static void saveTransactions(){
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))){
-//            writer.write(deposit.toCsvRow() + "\n");
-//            System.out.println("Deposit saved: "); {
-//            } catch (IOException e) {
-//                System.out.println("ERROR: Could not save the deposit: ");
-//            }
-//        }
+    public static void saveTransaction(){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv"))){
+            writer.write(transactions.toCsvRow() + "\n");
+            System.out.println("Deposit saved: "); {
+            } catch (IOException e) {
+                System.out.println("ERROR: Could not save the deposit: ");
+            }
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+        }
 
     }
     public static void displayAll(){
