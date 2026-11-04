@@ -194,7 +194,7 @@ public class App {
                 payments.add(transaction);
             }
         }
-        System.out.println("--- Deposits ---");
+        System.out.println("--- Payments ---");
         if (payments.isEmpty()) {
             System.out.println("No payments found.");
         } else {
@@ -213,16 +213,17 @@ public class App {
         for (Transaction transaction : transactions){
             int transactionMonth = transaction.getDate().getMonthValue();
             int transactionYear = transaction.getDate().getYear();
-            if (transaction.getAmount() > 0) {
-                deposits.add(transaction);
+
+            if (transactionYear == currentYear && transactionMonth == currentMonth) {
+                monthToDate.add(transaction);
             }
         }
-        System.out.println("--- Deposits ---");
-        if (deposits.isEmpty()) {
-            System.out.println("No deposits found.");
+        System.out.println("--- Month To Date Report ---");
+        if (monthToDate.isEmpty()) {
+            System.out.println("No transactions found for this month.");
         } else {
-            for (Transaction transaction : transactions) {
-                System.out.println(transaction.toCsvRow());
+            for (Transaction transaction : monthToDate) {
+                System.out.println(rowFormat);
             }
         }
         System.out.println();
