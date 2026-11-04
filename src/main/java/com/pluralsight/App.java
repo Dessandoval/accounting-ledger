@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class App {
     static String transactionFile = ("transactions.csv");
     static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-    static String rowFormat = "%-10s  %-8s  %-30s  %-22s  %10s%n";
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -223,14 +222,17 @@ public class App {
             System.out.println("No transactions found for this month.");
         } else {
             for (Transaction transaction : monthToDate) {
-                System.out.println(rowFormat);
+                System.out.println(transaction.toCsvRow());
             }
         }
-        System.out.println();
         pressEnterToContinue();
     }
     public static void displayPreviousMonthReport(){
-        System.out.println("Todo");
+        ArrayList<Transaction> previousMonthReport = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        int previousMonth = date.getMonthValue()-1;
+        int currentYear = date.getYear();
+
         pressEnterToContinue();
     }
     public static void displayYearToDateReport(){
