@@ -57,14 +57,24 @@ public class App {
         System.out.print("Enter vendor: ");
         String vendor = scanner.nextLine();
 
-        System.out.print("Enter amount: ");
-        double amount = Double.parseDouble(scanner.nextLine());
+        double amount = promptForAmount();
 
-        transactions.add(new Transaction(date, time, description, vendor, amount));
-        saveTransaction();
-        System.out.println("Deposit added successfully!");
+        if (saveTransaction(deposit)) {
+            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
+        }
         pressEnterToContinue();
 
+    }
+
+    private static double promptForAmount() {
+        while (true) {
+            System.out.print("Enter amount: ");
+            try {
+                return Double.parseDouble(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a number, (like 15.25).");
+            }
+        }
     }
 
     private static void makePayment() {
@@ -127,12 +137,12 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "1" -> runMonthToDateReport();
-                case "2" -> runPreviousMonthReport();
-                case "3" -> runYearToDateReport();
-                case "4" -> runPreviousYearReport();
-                case "5" -> searchVendor();
-                case "0" -> System.out.println("Back to Leger");
+                case "1" -> displayMonthToDateReport();
+                case "2" -> displayPreviousMonthReport();
+                case "3" -> displayYearToDateReport();
+                case "4" -> displayPreviousYearReport();
+                case "5" -> searchByVendor();
+                case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That isn't a command. Try again.");
             }
         } while (!command.equals("0"));
@@ -146,11 +156,10 @@ public class App {
         try (BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(transactionFile, true))){
             bufferedwriter.write(transaction.toCsvRow() + "\n");
             transactions.add(transaction);
-            return true; {
-            } catch (IOException e) {
-                System.out.println("ERROR: Could not save the deposit: " + transactionFile  + ": " + e.getMessage());
-                return false;
-            }
+            return true;
+        } catch (IOException e) {
+            System.out.println("ERROR: Could not save the deposit: " + transactionFile  + ": " + e.getMessage());
+            return false;
         }
 
     }
@@ -165,24 +174,28 @@ public class App {
 
     }
     public static void displayDeposits(){
+        if (saveTransaction(deposit)) {
+            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
+        }
+        pressEnterToContinue();
 
     }
     public static void displayPayments() {
 
     }
-    public static void runMonthToDateReport(){
+    public static void displayMonthToDateReport(){
 
     }
-    public static void runPreviousMonthReport(){
+    public static void displayPreviousMonthReport(){
 
     }
-    public static void runYearToDateReport(){
+    public static void displayYearToDateReport(){
 
     }
-    public static void runPreviousYearReport(){
+    public static void displayPreviousYearReport(){
 
     }
-    public static void searchVendor(){
+    public static void searchByVendor(){
 
     }
     public static void loadTransactions() {
