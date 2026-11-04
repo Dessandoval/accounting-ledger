@@ -59,13 +59,11 @@ public class App {
 
         double amount = promptForAmount();
 
-//        if (saveTransaction(deposit)) {
-//            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
-//        }
-//        pressEnterToContinue();
-
+        if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
+            System.out.println("Payment recorded successfully!");
+        }
+        pressEnterToContinue();
     }
-
     private static double promptForAmount() {
         while (true) {
             System.out.print("Enter amount: ");
@@ -76,7 +74,6 @@ public class App {
             }
         }
     }
-
     private static void makePayment() {
         System.out.println("--- Make Payment ---");
         LocalDate date = LocalDate.now();
@@ -154,8 +151,8 @@ public class App {
     }
     public static boolean saveTransaction(Transaction transaction){
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(transactionFile, true))){
-            bufferedWriter.write(transaction.toCsvRow() + "\n");
             transactions.add(transaction);
+            bufferedWriter.write(transaction.toCsvRow() + "\n");
             return true;
         } catch (IOException e) {
             System.out.println("ERROR: Could not save the deposit: " + transactionFile  + ": " + e.getMessage());
@@ -174,11 +171,12 @@ public class App {
 
     }
     public static void displayDeposits(){
-//        if (saveTransaction(deposit)) {
-//            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
-//        }
-//        pressEnterToContinue();
-
+       ArrayList<Transaction> deposits = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                deposits.add(transaction);
+            }
+        }
     }
     public static void displayPayments() {
         System.out.println("Todo");
