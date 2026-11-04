@@ -181,7 +181,7 @@ public class App {
         if (deposits.isEmpty()) {
             System.out.println("No deposits found.");
         } else {
-            for (Transaction transaction : transactions) {
+            for (Transaction transaction : deposits) {
                 System.out.println(transaction.toCsvRow());
             }
         }
@@ -198,7 +198,7 @@ public class App {
         if (payments.isEmpty()) {
             System.out.println("No payments found.");
         } else {
-            for (Transaction transaction : transactions) {
+            for (Transaction transaction : payments) {
                 System.out.println(transaction.toCsvRow());
             }
         }
