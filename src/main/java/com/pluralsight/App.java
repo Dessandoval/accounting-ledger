@@ -153,8 +153,8 @@ public class App {
         scanner.nextLine();
     }
     public static boolean saveTransaction(Transaction transaction){
-        try (BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(transactionFile, true))){
-            bufferedwriter.write(transaction.toCsvRow() + "\n");
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(transactionFile, true))){
+            bufferedWriter.write(transaction.toCsvRow() + "\n");
             transactions.add(transaction);
             return true;
         } catch (IOException e) {
