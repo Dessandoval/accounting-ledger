@@ -177,9 +177,31 @@ public class App {
                 deposits.add(transaction);
             }
         }
+        System.out.println("--- Deposits ---");
+        if (deposits.isEmpty()) {
+            System.out.println("No deposits found.");
+        } else {
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
+        pressEnterToContinue();
     }
     public static void displayPayments() {
-        System.out.println("Todo");
+        ArrayList<Transaction> payments = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                payments.add(transaction);
+            }
+        }
+        System.out.println("--- Deposits ---");
+        if (payments.isEmpty()) {
+            System.out.println("No payments found.");
+        } else {
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
         pressEnterToContinue();
     }
     public static void displayMonthToDateReport(){
