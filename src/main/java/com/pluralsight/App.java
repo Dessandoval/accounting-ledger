@@ -181,22 +181,22 @@ public class App {
 
     }
     public static void displayPayments() {
-
+        System.out.println("Todo");
     }
     public static void displayMonthToDateReport(){
-
+        System.out.println("Todo");
     }
     public static void displayPreviousMonthReport(){
-
+        System.out.println("Todo");
     }
     public static void displayYearToDateReport(){
-
+        System.out.println("Todo");
     }
     public static void displayPreviousYearReport(){
-
+        System.out.println("Todo");
     }
     public static void searchByVendor(){
-
+        System.out.println("Todo");
     }
     public static void loadTransactions() {
         try {
