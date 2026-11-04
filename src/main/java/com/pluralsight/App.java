@@ -59,10 +59,10 @@ public class App {
 
         double amount = promptForAmount();
 
-        if (saveTransaction(deposit)) {
-            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
-        }
-        pressEnterToContinue();
+//        if (saveTransaction(deposit)) {
+//            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
+//        }
+//        pressEnterToContinue();
 
     }
 
@@ -174,29 +174,35 @@ public class App {
 
     }
     public static void displayDeposits(){
-        if (saveTransaction(deposit)) {
-            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
-        }
-        pressEnterToContinue();
+//        if (saveTransaction(deposit)) {
+//            System.out.printf("Saved deposit of $%.2f from %s.%n", deposit.getAmount(), deposit.getVendor());
+//        }
+//        pressEnterToContinue();
 
     }
     public static void displayPayments() {
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void displayMonthToDateReport(){
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void displayPreviousMonthReport(){
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void displayYearToDateReport(){
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void displayPreviousYearReport(){
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void searchByVendor(){
         System.out.println("Todo");
+        pressEnterToContinue();
     }
     public static void loadTransactions() {
         try {
