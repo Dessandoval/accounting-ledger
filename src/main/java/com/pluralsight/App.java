@@ -194,7 +194,7 @@ public class App {
                 payments.add(transaction);
             }
         }
-        System.out.println("--- Deposits ---");
+        System.out.println("---- Deposits ----");
         if (payments.isEmpty()) {
             System.out.println("No payments found.");
         } else {
