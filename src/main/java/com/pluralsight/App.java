@@ -39,7 +39,7 @@ public class App {
             switch (command) {
                 case "D" -> addDeposit();
                 case "P" -> makePayment();
-                case "L" -> runLegerScreen();
+                case "L" -> runLedgerScreen();
                 case "X" -> System.out.println("Goodbye!");
                 default -> System.out.println("Invalid choice. Try again.");
             }
@@ -95,7 +95,7 @@ public class App {
 
     }
 
-    public static void runLegerScreen() {
+    public static void runLedgerScreen() {
         String command;
         do {
             System.out.println();
@@ -190,7 +190,7 @@ public class App {
     public static void displayPayments() {
         ArrayList<Transaction> payments = new ArrayList<>();
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() > 0) {
+            if (transaction.getAmount() < 0) {
                 payments.add(transaction);
             }
         }
@@ -205,8 +205,28 @@ public class App {
         pressEnterToContinue();
     }
     public static void displayMonthToDateReport(){
-        System.out.println("Todo");
-        pressEnterToContinue()
+        ArrayList<Transaction> monthToDate = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        int currentMonth = date.getMonthValue();
+        int currentYear = date.getYear();
+
+        for (Transaction transaction : transactions){
+            int transactionMonth = transaction.getDate().getMonthValue();
+            int transactionYear = transaction.getDate().getYear();
+            if (transaction.getAmount() > 0) {
+                deposits.add(transaction);
+            }
+        }
+        System.out.println("--- Deposits ---");
+        if (deposits.isEmpty()) {
+            System.out.println("No deposits found.");
+        } else {
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
+        System.out.println();
+        pressEnterToContinue();
     }
     public static void displayPreviousMonthReport(){
         System.out.println("Todo");
