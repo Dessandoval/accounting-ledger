@@ -194,7 +194,7 @@ public class App {
                 payments.add(transaction);
             }
         }
-        System.out.println("---- Deposits ----");
+        System.out.println("--- Deposits ---");
         if (payments.isEmpty()) {
             System.out.println("No payments found.");
         } else {
@@ -206,7 +206,7 @@ public class App {
     }
     public static void displayMonthToDateReport(){
         System.out.println("Todo");
-        pressEnterToContinue();
+        pressEnterToContinue()
     }
     public static void displayPreviousMonthReport(){
         System.out.println("Todo");
