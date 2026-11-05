@@ -1,7 +1,7 @@
 # Accounting  Ledger Application
 
-A command-line app Java application for tracking personal financial transactions. 
-This application allows users to record deposits and payments, 
+A command-line app Java application for tracking financial transactions. 
+This application allows users to make deposits and payments, 
 view transaction histories.
 
 ## Features
