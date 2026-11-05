@@ -1,19 +1,42 @@
 # Accounting  Ledger Application
 
-A command-line app that reads a children's story from a file
-and prints it with **line numbers**.
+A command-line app Java application for tracking personal financial transactions. 
+This application allows users to record deposits and payments, 
+view transaction histories.
 
 ## Features
 
-- Pick any story by its file name
-- Every line is numbered
-- A friendly message if the story isn't found
+Home Menu
+
+- Add Deposit: Prompt for description, vendor, and amount to record positive cash flow with the current date and time.
+- Make Payment: Prompt for description, vendor, and positive amount that automatically saved as a negative debit
+- Ledger Screen:  for viewing transactions and accessing reports.
+
+- Ledger Screen
+- All Entries: Displays all recorded financial transactions.
+- Deposits: Displays only positive financial transactions.
+- Payments: Displays only negative financial transactions (debits).
+- Reports Menu: Provides specialized filtering capabilities.
+
+- Reports Menu
+- Month To Date: Displays transactions recorded within the current calendar month.
+- Previous Month: Displays transactions from the prior calendar month.
+- Year To Date: Displays transactions recorded within the current calendar year.
+- Previous Year: Displays transactions from the prior calendar year.
+- Search by Vendor: Case-insensitive search for transactions by vendor name.
+
+- Methods
+- All transactions are saved to and loaded from a local transactions.csv file using | delimiters.
+- Automatic input validation prevents application crashes when parsing numeric inputs or blank text fields.
 
 ## How to run it
 
-1. Open the project in IntelliJ
-2. Run `App.java`
-3. Type a story name, like `goldilocks.txt`
+Launch the application to bring up the Home menu.
+Enter D to add a deposit or P to make a payment.
+Enter L to go to the Ledger screen.
+From the Ledger, view all items, view deposits/payments only -
+select R to run specific date or vendor searches.
+Enter X from the Home menu to safely exit the application.
 
 ## Interesting code
 
