@@ -22,6 +22,7 @@ public class App {
         loadTransactions(); // load first the run menu
         runHomeScreen();
     }
+
     public static void runHomeScreen() {
         String command;
         do {
@@ -44,6 +45,7 @@ public class App {
         } while (!command.equals("X"));
         scanner.close();
     }
+
     private static String promptForString(String fieldName) {
         while (true) {
             System.out.print("Enter " + fieldName + ": ");
@@ -54,6 +56,7 @@ public class App {
             System.out.println(fieldName + " cannot be blank. Please try again.");
         }
     }
+
     private static double promptForAmount() {
         while (true) {
             System.out.print("Enter amount: ");
@@ -68,6 +71,7 @@ public class App {
             }
         }
     }
+
     private static void addDeposit() {
         System.out.println("--- Add Deposit ---");
         LocalDate date = LocalDate.now();
@@ -82,6 +86,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     private static void makePayment() {
         System.out.println("--- Make Payment ---");
         LocalDate date = LocalDate.now();
@@ -149,11 +154,13 @@ public class App {
             }
         } while (!command.equals("0"));
     }
+
     public static void pressEnterToContinue() {
         System.out.println();
         System.out.print("Press Enter to go back to the menu...");
         scanner.nextLine();
     }
+
     public static boolean saveTransaction(Transaction transaction){
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(TRANSACTIONS_FILE, true))){
             transactions.add(transaction);
@@ -165,6 +172,7 @@ public class App {
         }
 
     }
+
     public static void displayAll(){
         if (transactions == null || transactions.isEmpty()) {
             System.out.println("No transactions found.");
@@ -175,6 +183,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayDeposits(){
        ArrayList<Transaction> deposits = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -192,6 +201,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayPayments() {
         ArrayList<Transaction> payments = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -209,6 +219,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayMonthToDateReport(){
         ArrayList<Transaction> monthToDate = new ArrayList<>();
         LocalDate date = LocalDate.now();
@@ -233,6 +244,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayPreviousMonthReport(){
         ArrayList<Transaction> previousMonthReport = new ArrayList<>();
         LocalDate date = LocalDate.now().minusMonths(1);
@@ -257,6 +269,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayYearToDateReport(){
         ArrayList<Transaction> yearToDate = new ArrayList<>();
         LocalDate date = LocalDate.now();
@@ -279,6 +292,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void displayPreviousYearReport(){
         ArrayList<Transaction> previousYearReport = new ArrayList<>();
         LocalDate date = LocalDate.now();
@@ -301,6 +315,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void searchByVendor(){
         System.out.println("Vendor Name: ");
         String vendor = scanner.nextLine().toLowerCase();
@@ -312,6 +327,7 @@ public class App {
         }
         pressEnterToContinue();
     }
+
     public static void loadTransactions() {
         try {
             FileReader fileReader = new FileReader("transactions.csv");
