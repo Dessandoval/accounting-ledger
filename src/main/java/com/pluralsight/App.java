@@ -7,14 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class App {
     static String TRANSACTIONS_FILE = "transactions.csv";
-    static DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -43,7 +41,6 @@ public class App {
                 default -> System.out.println("Invalid choice. Try again.");
             }
         } while (!command.equals("X"));
-        scanner.close();
     }
 
     private static String promptForString(String fieldName) {
@@ -167,7 +164,7 @@ public class App {
             bufferedWriter.write(transaction.toCsvRow() + "\n");
             return true;
         } catch (IOException e) {
-            System.out.println("ERROR: Could not save the deposit: " + TRANSACTIONS_FILE + ": " + e.getMessage());
+            System.out.println("ERROR: Could not save the transaction: " + TRANSACTIONS_FILE + ": " + e.getMessage());
             return false;
         }
 
@@ -186,11 +183,7 @@ public class App {
 
     public static void displayDeposits(){
        ArrayList<Transaction> deposits = new ArrayList<>();
-        for (Transaction transaction : transactions) {
-            if (transaction.getAmount() > 0) {
-                deposits.add(transaction);
-            }
-        }
+        filterDeposits(deposits);
         System.out.println("--- Deposits ---");
         if (deposits.isEmpty()) {
             System.out.println("No deposits found.");
@@ -202,13 +195,17 @@ public class App {
         pressEnterToContinue();
     }
 
-    public static void displayPayments() {
-        ArrayList<Transaction> payments = new ArrayList<>();
+    private static void filterDeposits(ArrayList<Transaction> deposits) {
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() < 0) {
-                payments.add(transaction);
+            if (transaction.getAmount() > 0) {
+                deposits.add(transaction);
             }
         }
+    }
+
+    public static void displayPayments() {
+        ArrayList<Transaction> payments = new ArrayList<>();
+        filterPayments(payments);
         System.out.println("--- Payments ---");
         if (payments.isEmpty()) {
             System.out.println("No payments found.");
@@ -220,7 +217,28 @@ public class App {
         pressEnterToContinue();
     }
 
+    private static void filterPayments(ArrayList<Transaction> payments) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                payments.add(transaction);
+            }
+        }
+    }
+
     public static void displayMonthToDateReport(){
+        ArrayList<Transaction> monthToDate = filterMonthToDate();
+        System.out.println("--- Month To Date Report ---");
+        if (monthToDate.isEmpty()) {
+            System.out.println("No transactions found for this month.");
+        } else {
+            for (Transaction transaction : monthToDate) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
+        pressEnterToContinue();
+    }
+
+    private static ArrayList<Transaction> filterMonthToDate() {
         ArrayList<Transaction> monthToDate = new ArrayList<>();
         LocalDate date = LocalDate.now();
         int currentMonth = date.getMonthValue();
@@ -234,18 +252,23 @@ public class App {
                 monthToDate.add(transaction);
             }
         }
-        System.out.println("--- Month To Date Report ---");
-        if (monthToDate.isEmpty()) {
+        return monthToDate;
+    }
+
+    public static void displayPreviousMonthReport(){
+        ArrayList<Transaction> previousMonthReport = filterPreviousMonthReport();
+        System.out.println("--- Previous Month Report ---");
+        if (previousMonthReport.isEmpty()) {
             System.out.println("No transactions found for this month.");
         } else {
-            for (Transaction transaction : monthToDate) {
+            for (Transaction transaction : previousMonthReport) {
                 System.out.println(transaction.toCsvRow());
             }
         }
         pressEnterToContinue();
     }
 
-    public static void displayPreviousMonthReport(){
+    private static ArrayList<Transaction> filterPreviousMonthReport() {
         ArrayList<Transaction> previousMonthReport = new ArrayList<>();
         LocalDate date = LocalDate.now().minusMonths(1);
         int previousMonth = date.getMonthValue();
@@ -259,15 +282,7 @@ public class App {
                 previousMonthReport.add(transaction);
             }
         }
-        System.out.println("--- Previous Month Report ---");
-        if (previousMonthReport.isEmpty()) {
-            System.out.println("No transactions found for this month.");
-        } else {
-            for (Transaction transaction : previousMonthReport) {
-                System.out.println(transaction.toCsvRow());
-            }
-        }
-        pressEnterToContinue();
+        return previousMonthReport;
     }
 
     public static void displayYearToDateReport(){
@@ -295,7 +310,7 @@ public class App {
 
     public static void displayPreviousYearReport(){
         ArrayList<Transaction> previousYearReport = new ArrayList<>();
-        LocalDate date = LocalDate.now().minusMonths(1);
+        LocalDate date = LocalDate.now().minusYears(1);
         int previousYear = date.getYear();
 
         for (Transaction transaction : transactions){
