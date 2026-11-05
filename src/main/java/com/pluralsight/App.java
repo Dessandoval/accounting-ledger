@@ -104,7 +104,7 @@ public class App {
         String command;
         do {
             System.out.println();
-            System.out.println("=== Ledger Screen ===");
+            System.out.println("=== Ledger ===");
             System.out.println("A) All");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
