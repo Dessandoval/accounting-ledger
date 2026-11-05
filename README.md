@@ -14,13 +14,13 @@ Home Menu
 - Make Payment: Prompt for description, vendor, and positive amount that automatically saved as a negative debit
 - Ledger Screen:  for viewing transactions and accessing reports.
 
-- Ledger Screen
+Ledger Screen
 - All Entries: Displays all recorded financial transactions.
 - Deposits: Displays only positive financial transactions.
 - Payments: Displays only negative financial transactions (debits).
 - Reports Menu: Provides specialized filtering capabilities.
 
-- Reports Menu
+Reports Screen
 - Month To Date: Displays transactions recorded within the current calendar month.
 - Previous Month: Displays transactions from the prior calendar month.
 - Year To Date: Displays transactions recorded within the current calendar year.
