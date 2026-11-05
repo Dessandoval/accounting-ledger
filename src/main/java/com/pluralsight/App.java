@@ -18,11 +18,11 @@ public class App {
 
     public static void main(String[] args) {
         loadTransactions();// load first the run menu
+        displayWelcomeBanner();
         runHomeScreen();
     }
 
     public static void runHomeScreen() {
-        displayWelcomeBanner();
         String command;
         do {
             System.out.println();
