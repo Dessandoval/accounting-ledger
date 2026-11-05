@@ -45,7 +45,6 @@ public class App {
         } while (!command.equals("X"));
         scanner.close();
     }
-
     private static void addDeposit() {
         System.out.println("--- Add Deposit ---");
         LocalDate date = LocalDate.now();
@@ -79,11 +78,8 @@ public class App {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        System.out.print("Enter description: ");
-        String description = scanner.nextLine();
-
-        System.out.print("Enter vendor: ");
-        String vendor = scanner.nextLine();
+        String description = promptForString("description");
+        String vendor = promptForString("vendor");
 
         System.out.print("Enter amount (positive number, will be saved as a debit): ");
         double amount = -Math.abs(Double.parseDouble(scanner.nextLine()));
