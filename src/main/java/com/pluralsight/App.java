@@ -43,7 +43,9 @@ public class App {
                 default -> System.out.println("Invalid choice. Try again.");
             }
         } while (!command.equals("X"));
+        scanner.close();
     }
+
 
     private static void addDeposit() {
         System.out.println("--- Add Deposit ---");
@@ -167,7 +169,7 @@ public class App {
         for (Transaction transaction : transactions) {
             System.out.println(transaction.toCsvRow());
         }
-
+        pressEnterToContinue();
     }
     public static void displayDeposits(){
        ArrayList<Transaction> deposits = new ArrayList<>();
@@ -233,18 +235,77 @@ public class App {
         int previousMonth = date.getMonthValue()-1;
         int currentYear = date.getYear();
 
+        for (Transaction transaction : transactions){
+            int transactionMonth = transaction.getDate().getMonthValue();
+            int transactionYear = transaction.getDate().getYear();
+
+            if (transactionYear == currentYear && transactionMonth == previousMonth) {
+                previousMonthReport.add(transaction);
+            }
+        }
+        System.out.println("--- Previous Month Report ---");
+        if (previousMonthReport.isEmpty()) {
+            System.out.println("No transactions found for this month.");
+        } else {
+            for (Transaction transaction : previousMonthReport) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
         pressEnterToContinue();
     }
     public static void displayYearToDateReport(){
-        System.out.println("Todo");
+        ArrayList<Transaction> yearToDate = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        int currentYear = date.getYear();
+
+        for (Transaction transaction : transactions){
+            int transactionYear = transaction.getDate().getYear();
+
+            if (transactionYear == currentYear) {
+                yearToDate.add(transaction);
+            }
+        }
+        System.out.println("--- Year To Date Report ---");
+        if (yearToDate.isEmpty()) {
+            System.out.println("No transactions found for this year.");
+        } else {
+            for (Transaction transaction : yearToDate) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
         pressEnterToContinue();
     }
     public static void displayPreviousYearReport(){
-        System.out.println("Todo");
+        ArrayList<Transaction> previousYearReport = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        int previousYear = date.getYear()-1;
+
+        for (Transaction transaction : transactions){
+            int transactionYear = transaction.getDate().getYear();
+
+            if (transactionYear == previousYear) {
+                previousYearReport.add(transaction);
+            }
+        }
+        System.out.println("--- Previous Year Report ---");
+        if (previousYearReport.isEmpty()) {
+            System.out.println("No transactions found for this year.");
+        } else {
+            for (Transaction transaction : previousYearReport) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
         pressEnterToContinue();
     }
     public static void searchByVendor(){
-        System.out.println("Todo");
+        System.out.println("Vendor Name: ");
+        String vendor = scanner.nextLine().toLowerCase();
+
+        for (Transaction transaction : transactions){
+            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
+                System.out.println(transaction.toCsvRow());
+            }
+        }
         pressEnterToContinue();
     }
     public static void loadTransactions() {
@@ -270,5 +331,4 @@ public class App {
             System.out.println("There was an error loading the transaction file.");
         }
     }
-
 }
