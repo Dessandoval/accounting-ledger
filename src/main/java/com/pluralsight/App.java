@@ -22,7 +22,7 @@ public class App {
     }
 
     public static void runHomeScreen() {
-        displayBanner();
+        displayWelcomeBanner();
         String command;
         do {
             System.out.println();
@@ -376,9 +376,9 @@ public class App {
             System.out.println("There was an error loading the transaction file.");
         }
     }
-    public static void displayBanner() {
+    public static void displayWelcomeBanner() {
         System.out.println("==================================================");
-        System.out.println("          $$$ ACCOUNTING LEDGER APPLICATION $$$        ");
+        System.out.println("          Welcome to Your Accounting Ledger       ");
         System.out.println("==================================================");
     }
 }
