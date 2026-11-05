@@ -41,17 +41,14 @@ Enter X from the Home menu to safely exit the application.
 ## Interesting code
 
 ```java  
-public static void searchByVendor(){
-System.out.println("Vendor Name: ");
-String vendor = scanner.nextLine().toLowerCase();
-
-        for (Transaction transaction : transactions){
-        if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-        System.out.println(transaction.toCsvRow());
-        }
-        }
-pressEnterToContinue();
-    }
+public String toDisplayCard() {
+    return "----------------------------------------\n" +
+            " Date: " + date + " | Time: " + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\n" +
+            " Description: " + description + "\n" +
+            " Vendor: " + vendor + "\n" +
+            " Amount: $" + String.format("%.2f", amount) + "\n" +
+            "----------------------------------------";
+}
 ```
 ## Screens and Menus
 
