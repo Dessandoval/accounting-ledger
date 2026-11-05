@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class App {
-    static String transactionFile = ("transactions.csv");
+    static String TRANSACTIONS_FILE = "transactions.csv";
     static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
@@ -155,12 +155,12 @@ public class App {
         scanner.nextLine();
     }
     public static boolean saveTransaction(Transaction transaction){
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(transactionFile, true))){
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(TRANSACTIONS_FILE, true))){
             transactions.add(transaction);
             bufferedWriter.write(transaction.toCsvRow() + "\n");
             return true;
         } catch (IOException e) {
-            System.out.println("ERROR: Could not save the deposit: " + transactionFile  + ": " + e.getMessage());
+            System.out.println("ERROR: Could not save the deposit: " + TRANSACTIONS_FILE + ": " + e.getMessage());
             return false;
         }
 
