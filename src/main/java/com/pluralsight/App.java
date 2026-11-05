@@ -286,7 +286,7 @@ public class App {
     }
 
     public static void displayYearToDateReport(){
-        ArrayList<Transaction> yearToDate = filterYearToDate(LocalDate.now());
+        ArrayList<Transaction> yearToDate = filterYearToDate();
         System.out.println("--- Year To Date Report ---");
         if (yearToDate.isEmpty()) {
             System.out.println("No transactions found for this year.");
@@ -298,12 +298,12 @@ public class App {
         pressEnterToContinue();
     }
 
-    private static ArrayList<Transaction> filterYearToDate(LocalDate now) {
+    private static ArrayList<Transaction> filterYearToDate() {
         ArrayList<Transaction> yearToDate = new ArrayList<>();
-        LocalDate date = now;
+        LocalDate date = LocalDate.now();
         int currentYear = date.getYear();
 
-        for (Transaction transaction : transactions) {
+        for (Transaction transaction : transactions){
             int transactionYear = transaction.getDate().getYear();
 
             if (transactionYear == currentYear) {
@@ -314,7 +314,7 @@ public class App {
     }
 
     public static void displayPreviousYearReport(){
-        ArrayList<Transaction> previousYearReport = filterYearToDate(LocalDate.now().minusYears(1));
+        ArrayList<Transaction> previousYearReport = filterPreviousYearReport();
         System.out.println("--- Previous Year Report ---");
         if (previousYearReport.isEmpty()) {
             System.out.println("No transactions found for this year.");
@@ -324,6 +324,21 @@ public class App {
             }
         }
         pressEnterToContinue();
+    }
+
+    private static ArrayList<Transaction> filterPreviousYearReport() {
+        ArrayList<Transaction> previousYearReport = new ArrayList<>();
+        LocalDate date = LocalDate.now().minusYears(1);
+        int previousYear = date.getYear();
+
+        for (Transaction transaction : transactions){
+            int transactionYear = transaction.getDate().getYear();
+
+            if (transactionYear == previousYear) {
+                previousYearReport.add(transaction);
+            }
+        }
+        return previousYearReport;
     }
 
     public static void searchByVendor(){
