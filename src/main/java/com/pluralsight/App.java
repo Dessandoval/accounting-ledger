@@ -286,17 +286,7 @@ public class App {
     }
 
     public static void displayYearToDateReport(){
-        ArrayList<Transaction> yearToDate = new ArrayList<>();
-        LocalDate date = LocalDate.now();
-        int currentYear = date.getYear();
-
-        for (Transaction transaction : transactions){
-            int transactionYear = transaction.getDate().getYear();
-
-            if (transactionYear == currentYear) {
-                yearToDate.add(transaction);
-            }
-        }
+        ArrayList<Transaction> yearToDate = filterYearToDate(LocalDate.now());
         System.out.println("--- Year To Date Report ---");
         if (yearToDate.isEmpty()) {
             System.out.println("No transactions found for this year.");
@@ -308,18 +298,23 @@ public class App {
         pressEnterToContinue();
     }
 
-    public static void displayPreviousYearReport(){
-        ArrayList<Transaction> previousYearReport = new ArrayList<>();
-        LocalDate date = LocalDate.now().minusYears(1);
-        int previousYear = date.getYear();
+    private static ArrayList<Transaction> filterYearToDate(LocalDate now) {
+        ArrayList<Transaction> yearToDate = new ArrayList<>();
+        LocalDate date = now;
+        int currentYear = date.getYear();
 
-        for (Transaction transaction : transactions){
+        for (Transaction transaction : transactions) {
             int transactionYear = transaction.getDate().getYear();
 
-            if (transactionYear == previousYear) {
-                previousYearReport.add(transaction);
+            if (transactionYear == currentYear) {
+                yearToDate.add(transaction);
             }
         }
+        return yearToDate;
+    }
+
+    public static void displayPreviousYearReport(){
+        ArrayList<Transaction> previousYearReport = filterYearToDate(LocalDate.now().minusYears(1));
         System.out.println("--- Previous Year Report ---");
         if (previousYearReport.isEmpty()) {
             System.out.println("No transactions found for this year.");
