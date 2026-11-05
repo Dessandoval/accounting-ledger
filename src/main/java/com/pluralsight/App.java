@@ -176,7 +176,7 @@ public class App {
             return;
         }
         for (Transaction transaction : transactions) {
-            System.out.println(transaction.toCsvRow());
+            System.out.println(transaction.toDisplayCard());
         }
         pressEnterToContinue();
     }
@@ -189,7 +189,7 @@ public class App {
             System.out.println("No deposits found.");
         } else {
             for (Transaction transaction : deposits) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -211,7 +211,7 @@ public class App {
             System.out.println("No payments found.");
         } else {
             for (Transaction transaction : payments) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -232,7 +232,7 @@ public class App {
             System.out.println("No transactions found for this month.");
         } else {
             for (Transaction transaction : monthToDate) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -262,7 +262,7 @@ public class App {
             System.out.println("No transactions found for this month.");
         } else {
             for (Transaction transaction : previousMonthReport) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -292,7 +292,7 @@ public class App {
             System.out.println("No transactions found for this year.");
         } else {
             for (Transaction transaction : yearToDate) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -320,7 +320,7 @@ public class App {
             System.out.println("No transactions found for this year.");
         } else {
             for (Transaction transaction : previousYearReport) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();
@@ -346,7 +346,7 @@ public class App {
 
         for (Transaction transaction : transactions){
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-                System.out.println(transaction.toCsvRow());
+                System.out.println(transaction.toDisplayCard());
             }
         }
         pressEnterToContinue();

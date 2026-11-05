@@ -63,4 +63,12 @@ public class Transaction {
         return date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "|"
                 + description + "|" + vendor + "|" + String.format("%.2f", amount);
     }
+    public String toDisplayCard() {
+        return "----------------------------------------\n" +
+                " Date: " + date + " | Time: " + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\n" +
+                " Description: " + description + "\n" +
+                " Vendor: " + vendor + "\n" +
+                " Amount: $" + String.format("%.2f", amount) + "\n" +
+                "----------------------------------------";
+    }
 }
