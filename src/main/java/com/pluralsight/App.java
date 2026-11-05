@@ -51,12 +51,8 @@ public class App {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        System.out.print("Enter description: ");
-        String description = scanner.nextLine();
-
-        System.out.print("Enter vendor: ");
-        String vendor = scanner.nextLine();
-
+        String description = promptForString("description");
+        String vendor = promptForString("vendor");
         double amount = promptForAmount();
 
         if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
