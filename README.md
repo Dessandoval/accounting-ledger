@@ -5,6 +5,8 @@ This application allows users to record deposits and payments,
 view transaction histories.
 
 ## Features
+Display Welcome Banner 
+- this is user start of application they will be greeted with this before the home screens
 
 Home Menu
 
