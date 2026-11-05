@@ -1,4 +1,4 @@
-# Bedtime Stories
+# Accounting  Ledger Application
 
 A command-line app that reads a children's story from a file
 and prints it with **line numbers**.
@@ -17,42 +17,33 @@ and prints it with **line numbers**.
 
 ## Interesting code
 
-```java
-String line = bufferedReader.readLine();
-while (line != null) {
-    System.out.println(line);
-    line = bufferedReader.readLine();
-}
+```java  
+public static void searchByVendor(){
+System.out.println("Vendor Name: ");
+String vendor = scanner.nextLine().toLowerCase();
+
+        for (Transaction transaction : transactions){
+        if (transaction.getVendor().equalsIgnoreCase(vendor)) {
+        System.out.println(transaction.toCsvRow());
+        }
+        }
+pressEnterToContinue();
+    }
 ```
-
-## Screenshot
-
-![The app printing a story](images/story-screen.png)
-
-Made by Sam for the [Java Academy](https://craigmckeachie.github.io/java-academy-docs/).
-
-
-
 ## Screens and Menus
 
 ```text
 
 main
 
-└── runHomeScreen()        
-  
-| D) Add Deposit → addDeposit()
- 
-| P) Make Payment → makePayment()
-
-│ L) Ledger → runLedgerScreen()
-
+└── runHomeScreen()         
+| D) Add Deposit    → addDeposit()
+| P) Make Payment   → makePayment()
+│ L) Ledger         → runLedgerScreen()
 │ X) Exit
-
 │
 └── runLedgerScreen() 
-
-| A) All → displayAllTransactions ()
+| A) All              → displayAllTransactions ()
 │ D) Deposits         → displayDeposits()
 │ P) Payments         → displayPayments()
 │ R) Reports          → runReportsScreen()
