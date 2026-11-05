@@ -46,7 +46,6 @@ public class App {
         scanner.close();
     }
 
-
     private static void addDeposit() {
         System.out.println("--- Add Deposit ---");
         LocalDate date = LocalDate.now();
@@ -69,7 +68,11 @@ public class App {
         while (true) {
             System.out.print("Enter amount: ");
             try {
-                return Double.parseDouble(scanner.nextLine().trim());
+                double amount = Double.parseDouble(scanner.nextLine().trim());
+                if (amount > 0) {
+                    return amount;
+                }
+                System.out.println("Please enter an amount greater than 0.");
             } catch (NumberFormatException e) {
                 System.out.println("Please enter a number, (like 15.25).");
             }
@@ -329,6 +332,16 @@ public class App {
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println("There was an error loading the transaction file.");
+        }
+    }
+    private static String promptForString(String fieldName) {
+        while (true) {
+            System.out.print("Enter " + fieldName + ": ");
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
+            System.out.println(fieldName + " cannot be blank. Please try again.");
         }
     }
 }
