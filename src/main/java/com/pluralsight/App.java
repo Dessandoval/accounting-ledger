@@ -22,7 +22,6 @@ public class App {
         loadTransactions(); // load first the run menu
         runHomeScreen();
     }
-
     public static void runHomeScreen() {
         String command;
         do {
@@ -45,19 +44,15 @@ public class App {
         } while (!command.equals("X"));
         scanner.close();
     }
-    private static void addDeposit() {
-        System.out.println("--- Add Deposit ---");
-        LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
-
-        String description = promptForString("description");
-        String vendor = promptForString("vendor");
-        double amount = promptForAmount();
-
-        if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
-            System.out.println("Payment recorded successfully!");
+    private static String promptForString(String fieldName) {
+        while (true) {
+            System.out.print("Enter " + fieldName + ": ");
+            String input = scanner.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
+            System.out.println(fieldName + " cannot be blank. Please try again.");
         }
-        pressEnterToContinue();
     }
     private static double promptForAmount() {
         while (true) {
@@ -72,6 +67,20 @@ public class App {
                 System.out.println("Please enter a number, (like 15.25).");
             }
         }
+    }
+    private static void addDeposit() {
+        System.out.println("--- Add Deposit ---");
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        String description = promptForString("description");
+        String vendor = promptForString("vendor");
+        double amount = promptForAmount();
+
+        if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
+            System.out.println("Payment recorded successfully!");
+        }
+        pressEnterToContinue();
     }
     private static void makePayment() {
         System.out.println("--- Make Payment ---");
@@ -226,8 +235,8 @@ public class App {
     }
     public static void displayPreviousMonthReport(){
         ArrayList<Transaction> previousMonthReport = new ArrayList<>();
-        LocalDate date = LocalDate.now();
-        int previousMonth = date.getMonthValue()-1;
+        LocalDate date = LocalDate.now().minusMonths(1);
+        int previousMonth = date.getMonthValue();
         int currentYear = date.getYear();
 
         for (Transaction transaction : transactions){
@@ -324,16 +333,6 @@ public class App {
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println("There was an error loading the transaction file.");
-        }
-    }
-    private static String promptForString(String fieldName) {
-        while (true) {
-            System.out.print("Enter " + fieldName + ": ");
-            String input = scanner.nextLine().trim();
-            if (!input.isEmpty()) {
-                return input;
-            }
-            System.out.println(fieldName + " cannot be blank. Please try again.");
         }
     }
 }
