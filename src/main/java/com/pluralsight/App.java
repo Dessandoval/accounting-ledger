@@ -17,11 +17,12 @@ public class App {
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
     public static void main(String[] args) {
-        loadTransactions(); // load first the run menu
+        loadTransactions();// load first the run menu
         runHomeScreen();
     }
 
     public static void runHomeScreen() {
+        displayBanner();
         String command;
         do {
             System.out.println();
@@ -374,5 +375,10 @@ public class App {
         } catch (IOException e) {
             System.out.println("There was an error loading the transaction file.");
         }
+    }
+    public static void displayBanner() {
+        System.out.println("==================================================");
+        System.out.println("          $$$ ACCOUNTING LEDGER APPLICATION $$$        ");
+        System.out.println("==================================================");
     }
 }
