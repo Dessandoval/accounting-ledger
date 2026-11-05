@@ -78,7 +78,7 @@ public class App {
         double amount = promptForAmount();
 
         if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
-            System.out.println("Payment recorded successfully!");
+            System.out.println("Deposit recorded successfully!");
         }
         pressEnterToContinue();
     }
