@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class App {
     static String TRANSACTIONS_FILE = "transactions.csv";
-    static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+    static DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
@@ -96,7 +96,7 @@ public class App {
         String vendor = promptForString("vendor");
 
         System.out.print("Enter amount (positive number, will be saved as a debit): ");
-        double amount = -Math.abs(Double.parseDouble(scanner.nextLine()));
+        double amount = -Math.abs(promptForAmount());
 
         if (saveTransaction(new Transaction(date, time, description, vendor, amount))) {
             System.out.println("Payment recorded successfully!");
@@ -295,8 +295,8 @@ public class App {
 
     public static void displayPreviousYearReport(){
         ArrayList<Transaction> previousYearReport = new ArrayList<>();
-        LocalDate date = LocalDate.now();
-        int previousYear = date.getYear()-1;
+        LocalDate date = LocalDate.now().minusMonths(1);
+        int previousYear = date.getYear();
 
         for (Transaction transaction : transactions){
             int transactionYear = transaction.getDate().getYear();
@@ -317,8 +317,7 @@ public class App {
     }
 
     public static void searchByVendor(){
-        System.out.println("Vendor Name: ");
-        String vendor = scanner.nextLine().toLowerCase();
+        String vendor = promptForString("Vendor name");
 
         for (Transaction transaction : transactions){
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
